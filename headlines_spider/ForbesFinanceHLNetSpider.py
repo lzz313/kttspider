@@ -1,4 +1,3 @@
-import time
 import uuid
 import sys
 sys.path.append("../commonutils_spider/")
