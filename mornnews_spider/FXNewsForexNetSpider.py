@@ -37,7 +37,9 @@ def writeMorningForexDailyNews():
         print "Mysql Error %d: %s" % (e.args[0], e.args[1])
         conn.rollback()
         
-    formatSQL = 'INSERT MORNING_OTHERNEWS_RESOURCE_TABLE (KEYID,LINKURL,IMAGEURL,TITLE,PUBDATE,DESCRIPTCONTEXT,NEWSFLAG,SOURCEFLAG) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'
+    formatSQL = ' INSERT MORNING_OTHERNEWS_RESOURCE_TABLE' \
+                ' (KEYID,LINKURL,IMAGEURL,TITLE,PUBDATE,DESCRIPTCONTEXT,NEWSFLAG,SOURCEFLAG)' \
+                ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'
     try:
         cursor.executemany(formatSQL,currentList)
         conn.commit()
