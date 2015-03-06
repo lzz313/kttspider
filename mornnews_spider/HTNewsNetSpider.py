@@ -34,7 +34,5 @@ def writeMorningForexDailyNews():
                 ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'
     dbManager.executeManyInsert(formatSQL,currentArray)
 
-if __name__=='__main__':
-    writeMorningForexDailyNews()
 
 

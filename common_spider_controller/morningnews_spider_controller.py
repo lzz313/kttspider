@@ -13,6 +13,7 @@ import XQNewsNetSpider
 import QQNewsNetSpider
 import YiCaiFinanceNetSpider
 import QJNewsStockNetSpider
+import HTNewsNetSpider
 
 def crawDailyNews():
     
@@ -69,6 +70,9 @@ def crawDailyNews():
     # CRAW QJ STOCK NEWS SIPDER #
     print  '----START CRAW QJ STOCK NEWS----'
     QJNewsStockNetSpider.writeMorningQJDailyStockNews()
+
+    print '----START CRAW HT FOREX NEWS----'
+    HTNewsNetSpider.writeMorningForexDailyNews()
 
 if __name__=='__main__':
     crawDailyNews()
