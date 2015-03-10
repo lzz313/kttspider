@@ -29,15 +29,16 @@ def searchHexunBlog(link,id):
 
 def writeHexunBlog():
     dbManager = CommonsMysqlUtils._dbManager
-    SQL = 'DELETE FROM  HSHY_RESOURCE_DETAIL_TABLE'
+    SQL = 'DELETE FROM  DAILYBLOG_FOREXRESOURCE_DETAIL_TABLE'
     dbManager.executeUpdateOrDelete(SQL)
 
-    SELECTSQL = "SELECT CJXJ.LINKURL , CJXJ.ID  FROM DAILYBLOG_AUTHOR_RESOURCE_TABLE CJXJ WHERE CJXJ.NET_FL='hexun' "
+    SELECTSQL = " SELECT CJXJ.LINKURL , CJXJ.ID  FROM" \
+                " DAILYBLOG_AUTHOR_RESOURCE_TABLE CJXJ WHERE CJXJ.NET_FL='hexun' "
     rows = dbManager.selectMany(SELECTSQL)
 
     for row in rows:
         currentReult = searchHexunBlog(row[0],row[1])
-        formatSQL = ' INSERT  INTO  HSHY_RESOURCE_DETAIL_TABLE' \
+        formatSQL = ' INSERT  INTO  DAILYBLOG_FOREXRESOURCE_DETAIL_TABLE ' \
                     ' (ID,TITLE,LINKURL,PUBDATE,DESCRIPTCONTEXT,IMAGEURL)' \
                     ' VALUES (%s,%s,%s,%s,%s,%s)'
         dbManager.executeManyInsert(formatSQL,currentReult)
