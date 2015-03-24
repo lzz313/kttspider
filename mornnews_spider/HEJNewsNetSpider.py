@@ -18,7 +18,10 @@ def crawMorningDailyNews(link):
          pubDate = time.strftime("%Y-%m-%d %X",time.localtime())
          browsors = webdriver.PhantomJS()
          browsors.get(linkUrl)
-         mainContext = browsors.find_element_by_class_name('article-content')
+         try:
+             mainContext = browsors.find_element_by_class_name('article-content')
+         except NoSuchElementException,e:
+            continue
          imageUrl =None
          try:
             imageUrl = mainContext.find_element_by_class_name('article-content').find_element_by_tag_name('img')
