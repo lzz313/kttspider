@@ -1,6 +1,7 @@
 from  selenium import webdriver
 import sys
 sys.path.append("../commonutils_spider/")
+from selenium.common.exceptions import NoSuchElementException
 import CommonsMysqlUtils
 import time
 import uuid
@@ -14,9 +15,17 @@ def crawMorningDailyNews(link):
     for  context in listContext:
          title = context.find_element_by_class_name('title').text
          linkUrl = context.find_element_by_class_name('title').get_attribute('href')
-         imageUrl = context.find_element_by_tag_name('img').get_attribute('src')
          pubDate = time.strftime("%Y-%m-%d %X",time.localtime())
-         descriptContext = ''
+         browsors = webdriver.PhantomJS()
+         browsors.get(linkUrl)
+         mainContext = browsors.find_element_by_class_name('article-content')
+         imageUrl =None
+         try:
+            imageUrl = mainContext.find_element_by_class_name('article-content').find_element_by_tag_name('img')
+         except NoSuchElementException,e:
+            continue
+         imageUrl =imageUrl.get_attribute('src')
+         descriptContext = mainContext.find_element_by_tag_name('p').text
          currentArray.append([str(uuid.uuid1()),linkUrl,imageUrl,title,pubDate,descriptContext,'STOCK','HEJNET'])
 
     return currentArray
