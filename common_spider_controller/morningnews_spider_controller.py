@@ -19,7 +19,7 @@ def crawDailyNews():
     
     # CRAW HEJNEWS COMMENTS NEWS SIPDER
     print '----START CRAW HEJNEWS NEWS----'
-    #HEJNewsNetSpider.writeMorningDailyNews()
+    HEJNewsNetSpider.writeMorningDailyNews()
     
     # CRAW QQNEWS COMMENTS NEWS SIPDER
     print '----START CRAW QQNEWS NEWS----'

@@ -18,6 +18,7 @@ def crawMorningDailyNews(link):
          imageUrl = context.find_element_by_tag_name('img').get_attribute('data-original').split('!')[0]
          pubDate = time.strftime("%Y-%m-%d %X",time.localtime())
          descriptContext = ''
+         print imageUrl
          currentArray.append([str(uuid.uuid1()),linkUrl,imageUrl,title,pubDate,descriptContext,'STOCK','HEJNET'])
 
     return currentArray
