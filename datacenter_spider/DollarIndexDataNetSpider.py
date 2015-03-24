@@ -9,8 +9,9 @@ def  crawDollarIndexDataSource(link,keyList):
      browsor.get(link)
      currentArray = []
      print keyList
-     contextList = browsor.find_element_by_id('curr_table').text.split('\n')
+     contextList = browsor.find_elements_by_class_name('indexpagetable').text.split('\n')
      contextList = contextList[1:len(contextList)-1]
+     print  contextList
      for var in contextList:
         varList = var.split(' ')
         openTime = varList[0]
@@ -25,7 +26,7 @@ def  crawDollarIndexDataSource(link,keyList):
      return currentArray
 
 def  writeDollarIndexDataSource():
-     link ='http://cn.investing.com/quotes/us-dollar-index-historical-data'
+     link ='http://www.stockq.cn/index/USD.php'
      dbManager = CommonsMysqlUtils._dbManager
      selectSQL = ' SELECT  SUBSTRING(RESOURCE.OPENTIME,1,10) AS OPENTIME' \
                  ' FROM  DATACENTER_DOLLARINDEX_RESOURCE_TABLE RESOURCE '
@@ -41,8 +42,8 @@ def  writeDollarIndexDataSource():
            ' (OPENTIME,NEWSTOCKPRICE,OPENSTOCKPRICE,HIGHSTOCKPRICE,' \
            ' LOWSTOCKPRICE,TRADEVOLUME,PERCENTCHANGE)' \
            ' VALUES(%s,%s,%s,%s,%s,%s,%s)'
-     dbManager.executeManyInsert(SQL,resultArray)
-     dbManager.closeResource()
+     #dbManager.executeManyInsert(SQL,resultArray)
+     #dbManager.closeResource()
 
 if __name__ == '__main__':
     writeDollarIndexDataSource()
